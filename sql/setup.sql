@@ -1,9 +1,10 @@
-drop table if exists "user";
+drop table if exists subscriber;
 
-create table "user" (
-	user_id serial primary key,
+create table subscriber (
+	subscriber_id serial primary key,
 	name varchar(10), 
 	password varchar(15)
 );
 
-insert into "user" (name, "password") values ('Sara', 'ciaociao');
+insert into subscriber (name, "password") values ('Sara', 'ciaociao');
+insert into subscriber (name, "password") values ('Tatiana', 'buonasera');
