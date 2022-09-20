@@ -8,3 +8,4 @@ create table subscriber (
 
 insert into subscriber (name, "password") values ('Sara', 'ciaociao');
 insert into subscriber (name, "password") values ('Tatiana', 'buonasera');
+insert into subscriber (name, "password") values ('Beatrice', 'password');
