@@ -36,6 +36,7 @@ public class SubscriberDao {
 			}
 		} catch (SQLException se) {
 			log.error("Can't get subscriber " + name, se);
+			throw new IllegalStateException("Database problem!");
 		}
 
 		return null;
