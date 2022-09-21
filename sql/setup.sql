@@ -6,6 +6,8 @@ create table subscriber (
 	password varchar(15)
 );
 
-insert into subscriber (name, "password") values ('Sara', 'ciaociao');
-insert into subscriber (name, "password") values ('Tatiana', 'buonasera');
-insert into subscriber (name, "password") values ('Beatrice', 'password');
+begin;
+	insert into subscriber (name, "password") values ('Sara', 'ciaociao');
+	insert into subscriber (name, "password") values ('Tatiana', 'buonasera');
+	insert into subscriber (name, "password") values ('Beatrice', 'password');
+commit;
