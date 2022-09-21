@@ -12,9 +12,9 @@
 <p>Username o password errata!</p>
 </c:if>
 <form action="login" method="post">
-<label>Username<input name="username" value="${param.username}"></label>
-<label>Password<input type="password"></label>
-<button>ok!</button>
+    <label>Username<input name="username" value="${param.username}"></label>
+    <label>Password<input name="password" type="password"></label>
+    <button>ok!</button>
 </form>
 </body>
 </html>
