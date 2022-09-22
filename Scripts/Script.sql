@@ -1,21 +1,4 @@
-select f.name, f.description, s.name
-from forum f
-join "subscription" sn
-using (forum_id)
-join subscriber s 
-using (subscriber_id);
-
-
-
-select s.name, m.text, f.name 
-from forum f
-join message m 
-using (forum_id)
-join subscriber s 
-using (subscriber_id);
-
-
-select s.name, s.password
-from subscriber s;
-
-
+select m.message_id, m.text, s.name, s.subscriber_id
+from message m join subscriber s 
+using (subscriber_id)
+where forum_id= 1;
