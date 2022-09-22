@@ -9,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import purple.dao.Forum;
 import purple.dao.ForumDao;
+import purple.dao.Subscriber;
 
 /**
  * Servlet implementation class Forum
@@ -23,11 +25,19 @@ public class ForumAll extends HttpServlet {
 
 	@Resource(name = "jdbc/purple")
 	private DataSource ds;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Subscriber user = (Subscriber) session.getAttribute("user");
 		ForumDao dao = new ForumDao(ds);
-		List <Forum> forum = dao.getAll();
-		request.setAttribute("forum", forum);
+		if (user == null) {
+			List<Forum> forum = dao.getAll();
+			request.setAttribute("forum", forum);
+		} else {
+			
+		}
+
 		request.getRequestDispatcher("forum.jsp").forward(request, response);
 	}
 
