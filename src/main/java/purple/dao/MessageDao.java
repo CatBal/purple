@@ -1,7 +1,6 @@
 package purple.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +34,8 @@ public class MessageDao {
 				ResultSet rs = st.executeQuery(GET_BY_FORUM_ORDERED)) {
 			List<Message> result = new ArrayList<Message>();
 			while (rs.next()) {
-				Message message = new Message(rs.getSubscriber(1), rs.getString(2), rs.getTimestamp(3));
+				Subscriber s = new Subscriber (rs.getInt(4), rs.getString(3));
+				Message message = new Message(rs.getInt(1), rs.getString(2), s, rs.getTimestamp(5));
 				result.add(message);
 			}
 			return result;
