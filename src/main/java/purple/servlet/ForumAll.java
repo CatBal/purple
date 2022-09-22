@@ -1,6 +1,7 @@
 package purple.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,11 +32,15 @@ public class ForumAll extends HttpServlet {
 		HttpSession session = request.getSession();
 		Subscriber user = (Subscriber) session.getAttribute("user");
 		ForumDao dao = new ForumDao(ds);
+		List<Forum> forum = dao.getAll();
 		if (user == null) {
-			List<Forum> forum = dao.getAll();
 			request.setAttribute("forum", forum);
 		} else {
-			
+			List<Forum> myForum = dao.getAll(user.getId());
+			List<Forum> otherForum = new ArrayList<Forum>(forum);
+			otherForum.removeAll(myForum);
+			request.setAttribute("myForum", myForum);
+			request.setAttribute("otherForum", otherForum);
 		}
 
 		request.getRequestDispatcher("forum.jsp").forward(request, response);
