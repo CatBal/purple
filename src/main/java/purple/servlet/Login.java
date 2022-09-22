@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
@@ -40,6 +41,8 @@ public class Login extends HttpServlet {
 		if (user == null) {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
 			request.getRequestDispatcher("logged.jsp").forward(request, response);
 		}
 	}
