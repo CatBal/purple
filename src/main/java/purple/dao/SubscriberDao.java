@@ -17,6 +17,9 @@ public class SubscriberDao {
 			SELECT subscriber_id, name, password
 			FROM subscriber
 			WHERE name = ? AND password = ?""";
+	private static final String INSERT = """
+			insert into subscriber (name,password)
+			values (?,?)""";
 
 	private DataSource ds;
 
@@ -39,6 +42,21 @@ public class SubscriberDao {
 			throw new IllegalStateException("Database problem!");
 		}
 
+		return null;
+	}
+
+	public Subscriber insert(String name, String password) {
+		try (Connection conn = ds.getConnection(); //
+				PreparedStatement ps = conn.prepareStatement(INSERT)) {
+			ps.setString(1, name);
+			ps.setString(2, password);
+			int rows = ps.executeUpdate();
+			if (rows == 1) {
+				return getSubscriber(name, password);
+			}
+		} catch (SQLException se) {
+			log.error("Can't create subscriber " + name, se);
+		}
 		return null;
 	}
 }

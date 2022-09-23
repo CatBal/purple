@@ -5,7 +5,7 @@ drop table if exists forum;
 
 create table subscriber (
 	subscriber_id serial primary key,
-	name varchar(10), 
+	name varchar(10) unique, 
 	password varchar(15)
 );
 

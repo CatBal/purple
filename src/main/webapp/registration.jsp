@@ -24,7 +24,7 @@
 			<div class="col"></div>
 			<div class="col">
 				<c:if test="${param.username ne null}">
-					<p>User o password non validi!</p>
+					<p>User o password non accettati!</p>
 				</c:if>
 				<form action="registration" method="post">
 					<label>Username<input name="username" value="${param.username}"></label> 
