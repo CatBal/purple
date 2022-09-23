@@ -22,6 +22,10 @@ public class ForumDao {
 			FROM forum f join subscription s
 			USING (forum_id)
 			WHERE s.subscriber_id = ?""";
+	private static final String GET_BY_ID = """
+			SELECT forum_id, name, description
+			FROM forum
+			WHERE forum_id=?""";
 
 	private DataSource ds;
 
@@ -67,5 +71,19 @@ public class ForumDao {
 			log.error("Can't get forum", se);
 			throw new IllegalStateException("Database problem!");
 		}
+	}
+
+	public Forum get(int id) {
+		try (Connection conn = ds.getConnection(); PreparedStatement st = conn.prepareStatement(GET_BY_ID)) {
+			st.setInt(1, id);
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return new Forum(rs.getInt(1), rs.getString(2), rs.getString(3));
+				}
+			}
+		} catch (SQLException se) {
+			log.error("Can't get forum", se);
+		}
+		throw new IllegalStateException("Database problem!");
 	}
 }

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import purple.dao.Forum;
+import purple.dao.ForumDao;
 import purple.dao.Message;
 import purple.dao.MessageDao;
 
@@ -27,9 +29,12 @@ public class ForumOne extends HttpServlet {
 			throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		MessageDao dao = new MessageDao(ds);
-		List<Message> messages = dao.getMessages(id);
+		MessageDao messageDao = new MessageDao(ds);
+		List<Message> messages = messageDao.getMessages(id);
 		request.setAttribute("messages", messages);
+		ForumDao forumDao = new ForumDao(ds);
+		Forum forum = forumDao.get(id);
+		request.setAttribute("forum", forum);
 		request.getRequestDispatcher("/forumMessages.jsp").forward(request, response);
 	}
 
