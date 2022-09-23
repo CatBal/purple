@@ -22,3 +22,7 @@ from forum f left outer join "subscription" s
 on (forum_id)
 where s.subscriber_id != 1;*/
 
+select m.message_id, m.text, m.creation, m.subscriber_id, s.name
+from message m join subscriber s
+using (subscriber_id)
+where forum_id = 1;
