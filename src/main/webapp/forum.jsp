@@ -14,6 +14,7 @@
             <div class="col my2"><h1>Purple Forum</h1></div>
             <div class="col my1"></div>
         </div>
+</div>
 <h1>Forum disponibili</h1>
 <p>${forum}</p>
 </body>
